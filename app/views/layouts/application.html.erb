@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PrivateEvents</title>
+  <title>Private Events <%= "- #{current_user.name}" unless current_user.nil? %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% flash.each do |message_type, message| %>
+	<div class="flash-<%= message_type %>">
+		<%= message %>
+	</div>
+<% end %>
+
+<% if current_user %>
+	<%= link_to("Log out", logout_path, method: :delete) %>
+<% else %>
+	<%= link_to("Log in", login_path) %>
+<% end %>
 
 <%= yield %>
 
