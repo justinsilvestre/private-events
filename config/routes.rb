@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-
-  get 'sessions/create'
-
-  get 'sessions/destroy'
-
+  
   resources :users
+  resources :events
   get 'signup' => 'users#new', as: :signup
 
   get 'login' => 'sessions#new'

@@ -11,7 +11,7 @@ module SessionsHelper
 		end
 	end
 
-def log_in(user)
+  def log_in(user)
   	session[:user_id] = user.id
   end
 
@@ -34,4 +34,9 @@ def log_in(user)
   	cookies.delete(:user_id)
   	cookies.delete(:remember_token)
   end
+
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
+  end
+
 end
