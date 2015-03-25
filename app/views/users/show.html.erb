@@ -1,8 +1,43 @@
-<h1><%= @user.name %></h1>
-<p><%= @user.email %></p>
-<p><%= link_to "Create a new event", new_event_path %></p>
-<% if @user.events.any? %>
-	<ul>
-		<%= render @user.events %>
-	</ul>
-<% end %>
+
+<% if @user == current_user %>
+
+	<h1><%= @user.name %></h1>
+
+	<p><%= @user.email %></p>
+	<p><%= link_to("Create a new event", new_event_path) %></p>
+	<% if @user.events.any? %>
+		<h2>Your Events</h2>
+		<ul>
+			<% @user.events.each do |event| %>
+			<li>
+				<h3><%= link_to event.name, event %></h3>
+				<div><%= truncate(event.description, length: 30) %></div>
+			</li>
+			<% end %>
+		</ul>
+	<% end %>
+		<h2>Going to</h2>
+		<ul>
+			<%= render @user.attended_events.upcoming %>
+		</ul>
+
+	<% else %>
+
+		<h1><%= @user.name %></h1>
+		<% if @user.events.any? %>
+			<h2><%= @user.name %>'s Events</h2>
+			<ul>
+				<% @user.events.each do |event| %>
+				<li>
+					<h3><%= link_to event.name, event %></h3>
+					<div><%= truncate(event.description, length: 30) %></div>
+				</li>
+				<% end %>
+			</ul>
+		<% end %>
+
+		<h2>Going to</h2>
+		<ul>
+			<%= render @user.attended_events.upcoming %>
+		</ul>
+	<% end %>

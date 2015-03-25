@@ -2,10 +2,14 @@ class User < ActiveRecord::Base
 	attr_accessor :remember_token
 	has_secure_password
 	has_many :events, foreign_key: 'creator_id'
+	has_many :attendances, foreign_key: :attendee_id
+	has_many :attended_events, through: :attendances
 	before_save :downcase_email
 	validates :name, presence: true
 	validates :email, presence: true
 	validates :password, presence: true
+
+	# automatically set event creator as attending event, maybe?
 
 	def remember
 		self.remember_token = User.new_token

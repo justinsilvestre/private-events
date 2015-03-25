@@ -1,5 +1,14 @@
 <li id="event-<%= event.id %>">
-	<h3 class="name"><%= event.name %></h3>
-	<p class="time">When: <%= event.date %></p>
-	<p class="description">Description: <%= event.description %><p>
+	<h3><%= link_to event.name, event %></h3>
+	<p>
+		<% if event.upcoming? %>
+			<%= event.date.strftime("%e %B %Y") %>
+		<% else %>
+			<%= time_ago_in_words(event.date) %> ago
+		<% end %>
+	</p>
+	<p>Created by <%= link_to event.creator.name, event.creator %></p>
+	<p><%= event.location %></p>
+	<p><%= pluralize(event.attendances.count, "person") + (event.past? ? "went" : "going") %></p>
+	<p class="description"><%= event.description %><p>
 </li>

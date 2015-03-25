@@ -1,22 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 u1 = User.create(name: 'Justin Silvestre',
 									 email: 'justinsilvestre@gmail.com',
 									 password: 'justin',
-									 password_confirmation: 'justin');
+									 password_confirmation: 'justin')
 
-e1 = u1.events.build({ name: 'Thevent',
-											 date: Time.now,
-											 description: 'like srsly whoa'})
-e1.save
 
-# create multiple users, some with events, some without
-# look into faker
-# make sure some events are in the past, make sure some are upcoming
-# make sure some events have attendees
+# create 25 more users
+(1..25).each do |n|
+	name = Faker::Name.name
+	email = "example#{n}@example.com"
+	password = "password"
+	User.create!(name: name, email: email, password: password, password_confirmation: password)
+end
+
+# create 10 events within 6 months of today, created by one of the first 5 users
+(1..10).each do |n|
+	user = User.find(1 + rand(5))
+	event = user.events.create!(name: Faker::Lorem.sentence(3).capitalize, description: Faker::Lorem.paragraph(4),
+		date: Faker::Date.between(6.months.ago, 6.months.from_now), location: Faker::Address.street_address)
+	# give event up to 25 attendees
+	(rand(26)).times do |m|
+		attendance = event.attendances.build(attendee_id: m)
+		attendance.save
+	end
+end
+
+	
+
+
