@@ -5,28 +5,45 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+	</script>
+	<![endif]-->
 </head>
 <body>
-<% flash.each do |message_type, message| %>
-	<div class="flash-<%= message_type %>">
-		<%= message %>
-	</div>
-<% end %>
 
-<nav>
-	<ul>
-		<li><%= link_to "Events",events_path %></li>
-	<% if current_user %>
-		<li><%= link_to current_user.name, current_user %></li> 
-		<li><%= link_to("Log out", logout_path, method: :delete) %></li>
-	<% else %>
-		<li><%= link_to("Log in", login_path) %></li>
-		<li><%= link_to("Sign up", signup_path) %></li>
+<div class="top">
+<header>
+	<h1>avents</h1>
+	<nav>
+		<ul>
+			<li><%= link_to "Events",events_path %></li>
+		<% if current_user %>
+			<li><%= link_to current_user.name, current_user %></li> 
+			<li><%= link_to("Log out", logout_path, method: :delete) %></li>
+		<% else %>
+			<li><%= link_to("Log in", login_path) %></li>
+			<li><%= link_to("Sign up", signup_path) %></li>
+		<% end %>
+		</ul>
+	</nav>
+</header>
+</div>
+
+<div class="middle">
+	<div class="main">
+	<% flash.each do |message_type, message| %>
+		<div class="flash-<%= message_type %>">
+			<%= message %>
+		</div>
 	<% end %>
-	</ul>
-</nav>
+		<%= yield %>
+	</div>
+</div>
 
-<%= yield %>
-
+<div class="bottom">
+	<footer>
+	</footer>
+</div>
 </body>
 </html>

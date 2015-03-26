@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   
   resources :users
-  resources :events
+  resources :events do
+    resources :attendances, only: [:create, :destroy]
+  end
   get 'signup' => 'users#new', as: :signup
 
   get 'login' => 'sessions#new'

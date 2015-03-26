@@ -28,6 +28,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker', '1.4.2'
 
+gem 'bootstrap-datepicker-rails'
+
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -9,6 +9,15 @@
 	</p>
 	<p>Created by <%= link_to event.creator.name, event.creator %></p>
 	<p><%= event.location %></p>
-	<p><%= pluralize(event.attendances.count, "person") + (event.past? ? "went" : "going") %></p>
-	<p class="description"><%= event.description %><p>
+<p><%= "#{pluralize(event.attendances.count, 'person')} #{event.past? ? 'went' : 'going'}" %></p>
+<p>
+	<% if event.upcoming? %>
+	<% if (current_user && current_user.attending?(event)) %>
+		You RSVP'd to this event. <%= link_to 'Undo', event_attendance_path(event.id, event.attendances.find_by(attendee_id: current_user.id).id), method: :delete %>
+	<% else %>
+		<%= link_to 'RSVP', event_attendances_path(event.id), method: :post %>
+	<% end %>
+	<% end %>
+	</p>
+<p class="description"><%= event.description %><p>
 </li>

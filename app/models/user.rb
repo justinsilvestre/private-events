@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	attr_accessor :remember_token
 	has_secure_password
 	has_many :events, foreign_key: 'creator_id'
-	has_many :attendances, foreign_key: :attendee_id
+	has_many :attendances, foreign_key: :attendee_id, dependent: :destroy
 	has_many :attended_events, through: :attendances
 	before_save :downcase_email
 	validates :name, presence: true
@@ -33,6 +33,12 @@ class User < ActiveRecord::Base
 		digest = send("#{attribute}_digest")
 		return false if digest.nil?
 		BCrypt::Password.new(digest).is_password?(token)
+	end
+
+	def attending?(event)
+		attended_events.any? do |e|
+			event.id == e.id
+		end	
 	end
 
 	private

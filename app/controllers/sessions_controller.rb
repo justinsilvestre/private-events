@@ -13,7 +13,11 @@ class SessionsController < ApplicationController
   			forget user
   		end
   		flash[:success] = "Logged in as #{current_user.name}."
-  		redirect_to root_url
+  		if session[:forwarding_url]
+        redirect_to_stored_location
+      else
+        redirect_to root_url
+      end
   	else
   		flash.now[:danger] = "Invalid email/password combination"
   		render 'new'

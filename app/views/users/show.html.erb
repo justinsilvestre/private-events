@@ -11,7 +11,7 @@
 			<% @user.events.each do |event| %>
 			<li>
 				<h3><%= link_to event.name, event %></h3>
-				<div><%= truncate(event.description, length: 30) %></div>
+				<p><%= truncate(event.description, length: 50) %></p>
 			</li>
 			<% end %>
 		</ul>

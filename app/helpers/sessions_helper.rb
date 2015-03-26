@@ -39,4 +39,9 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 
+  def redirect_to_stored_location
+    redirect_to session[:forwarding_url]
+    session[:forwarding_url] = nil
+  end
+
 end

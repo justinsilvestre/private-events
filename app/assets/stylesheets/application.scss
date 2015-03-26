@@ -1,0 +1,141 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require bootstrap-datepicker
+ */
+
+
+$deep: #263326;
+	$dull: #30332E;
+$bold: #263248;
+	$dull_warm: #33302E;
+$light: #7E8AA2;
+$blank: #FFFFFF;
+$bright: #FF9800;
+	$shade: #66493D;
+
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 14px;
+	font-size: 1.4rem;
+	font-family: 'Helvetica World', 'Helvetica', 'Arial';
+}
+
+.top {
+	background-color: $deep;
+	color: $blank;
+
+	height: 80px;
+	height: 8rem;
+	width: 100%;
+
+	header {
+		padding: 10px;
+		padding: 1rem;
+		width: 800px;
+		width: 80rem;
+		height: 60px;
+		height: 6rem;
+		position:relative;
+		margin-left: auto;
+		margin-right: auto;
+
+		h1 {
+			position: absolute;
+			display: block;
+			margin: 0;
+			padding: 0;
+			bottom: 10px;
+			bottom: 1rem;
+			font-size: 30px;
+			font-size: 3rem;
+			font-weight: bold;
+		}
+
+		nav {
+			position: absolute;
+			right: 10px;
+			right: 1rem;
+			bottom: 10px;
+			bottom: 1rem;
+			ul {
+				li {
+					float:left;
+					padding:0 10px 0 10px;
+					padding:0 1rem 0 1rem;
+					a:link, a:visited, a:hover, a:active {
+						text-decoration: none;
+						color: $blank;
+					}
+					a:hover {
+						color: $bright;
+					}
+				}
+			}
+		}
+
+	}	
+
+}
+
+.middle {
+	width: 100%;
+	.main {
+		width: 800px;
+		width: 80rem;
+		margin-left: auto;
+		margin-right: auto;
+
+		h1 {
+			margin: 10px 0 10px 0;
+			margin: 1rem 0 1rem 0;
+			padding: 0px;
+			font-size: 50px;
+			font-size: 5rem;
+		}
+		h2 {
+			margin: 0px;
+			padding: 0px;
+			font-size: 30px;
+			font-size: 3rem;
+		}
+		h3 {
+			margin: 0px;
+			padding: 0px;
+			font-size: 20px;
+			font-size: 2rem;
+		}
+
+		a:link, a:visited, a:hover, a:active {
+			text-decoration: none;
+			color: $bright;
+		}
+		a:hover {
+			color: $shade;
+			text-decoration: underline;
+		}
+
+	}
+}
+
+label {
+	display:block;
+}
+input {
+	display:block;
+}
