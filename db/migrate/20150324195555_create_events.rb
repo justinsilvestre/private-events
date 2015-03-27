@@ -8,6 +8,6 @@ class CreateEvents < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    # add_foreign_key :events, :creators
+    add_foreign_key :events, :creators
   end
 end
