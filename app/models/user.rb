@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	attr_accessor :remember_token
 	has_secure_password
-	has_many :events, foreign_key: 'creator_id'
+	has_many :events, foreign_key: :creator_id
 	has_many :attendances, foreign_key: :attendee_id, dependent: :destroy
 	has_many :attended_events, through: :attendances, foreign_key: :attendee_id
 	before_save :downcase_email
