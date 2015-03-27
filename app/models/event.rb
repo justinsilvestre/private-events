@@ -8,9 +8,9 @@ class Event < ActiveRecord::Base
   validates :description, presence: true
   validates :location, presence: true
 
-  default_scope { order("date desc") }
-  scope :past, ->{ where("date < ?", Time.now).order("date asc") }
-  scope :upcoming, ->{ where("date > ?", Time.now).order("date desc") }
+
+  scope :past, ->{ where("date < ?", Time.now).order("date desc") }
+  scope :upcoming, ->{ where("date > ?", Time.now).order("date asc") }
 
   def past?
   	date < Time.now
@@ -18,5 +18,13 @@ class Event < ActiveRecord::Base
 
   def upcoming?
   	date >= Time.now
+  end
+
+  
+  validate :in_the_future, on: :create
+  def in_the_future
+    if date < Time.now
+      errors.add(:date, "has already passed")
+    end
   end
 end

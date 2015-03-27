@@ -1,0 +1,8 @@
+
+<% if event.upcoming? %>
+	<% if (current_user && current_user.attending?(event)) %>
+		You RSVP'd. <%= link_to 'Undo', rsvp_event_path(event), method: :delete, remote: true %>
+	<% else %>
+		<%= link_to 'RSVP', rsvp_event_path(event), method: :post, remote: true %>
+	<% end %>
+	<% end %>

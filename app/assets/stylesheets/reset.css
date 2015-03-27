@@ -18,14 +18,18 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	/*	margin: 0;
+	padding: 0;
+	border: 0; */
 }
 
 
-html,body {
-	margin: 0;
+html,body,div {
+		margin: 0;
 	padding: 0;
 	border: 0;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {

@@ -14,14 +14,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    create_params = event_params
-    create_params[:date] = ActiveSupport::TimeZone['UTC'].parse(create_params[:date].to_s)
-    @event = current_user.events.build(create_params)
-  	if @event.save
-  		redirect_to @event
-  	else
-  		render 'new'
-  	end
+      params_to_use = event_params
+      params_to_use[:date] = Time.strptime(params_to_use[:date],"%m/%d/%Y")
+      @event = current_user.events.build(params_to_use)
+    	if @event.save
+    		redirect_to @event
+    	else
+    		render 'new'
+    	end
+
   end
 
   def destroy

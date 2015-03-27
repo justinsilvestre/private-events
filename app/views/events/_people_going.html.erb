@@ -1,0 +1,2 @@
+<% goingwent = event.upcoming? ? 'going' : 'went' %>
+<%= "#{pluralize(event.attendances.count, 'person')} #{goingwent}" %>

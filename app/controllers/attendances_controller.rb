@@ -4,21 +4,26 @@ class AttendancesController < ApplicationController
 
 
 	def create
-		@event = Event.find(params[:event_id])
-		@attendance = @event.attendances.build(attendee_id: current_user.id)
-		@attendance.save
-		redirect_to @event
+		@event = Event.find(params[:id])
+		@attendance = @event.attendances.create(attendee_id: current_user.id)
+		respond_to do |format|
+			format.html {	redirect_to @event }
+			format.js
+		end
 	end
 
 	def destroy
-		@event = Event.find(params[:event_id])
-		@attendance = Attendance.find(params[:id])
+		@event = Event.find(params[:id])
+		@attendance = current_user.attendances.find_by(attended_event_id: params[:id])
 		unless current_user.attending? @event
 				flash[:danger] = 'You may only perform this action on events you created yourself.'
-				redirect_to @attendance.attended_event
+				redirect_to @event
 		end
 		@attendance.delete
-		redirect_to events_path
+		respond_to do |format|
+			format.html {	redirect_to events_url }
+			format.js
+		end
 	end
 
 	private

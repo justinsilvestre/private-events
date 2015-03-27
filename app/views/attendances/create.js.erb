@@ -1,0 +1,2 @@
+$('.rsvp-<%= @event.id %>').html("<%= j render('events/rsvp_link', event: @event) %>");
+$('.people-going-<%= @event.id %>').html("<%= j render('events/people_going', event: @event) %>");

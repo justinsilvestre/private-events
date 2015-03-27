@@ -1,18 +1,17 @@
+<div class="event-<%= @event.id %>">
 <h1><%= @event.name %></h3>
 	<p>Created by: <%= link_to @event.creator.name, @event.creator %></p>
 	<p>When: <%= @event.date.strftime("%e %B %Y") %></p>
 	<p>Where: <%= @event.location %></p>
-	<p><%= "#{pluralize(@event.attendances.count, 'person')} #{@event.past? ? 'went' : 'going'}" %></p>
+	<p class="people-going-<%= @event.id %>"><%= render 'people_going', event: @event %></p>
 	
-	<p>
-		<% if current_user.attending? @event %>
-			You RSVP'd to this event. <%= link_to 'Undo', event_attendance_path(@event.id, @event.attendances.find_by(attendee_id: current_user.id).id), method: :delete %>
-		<% else %>
-			<%= link_to 'RSVP', event_attendances_path(@event.id), method: :post %>
-		<% end %>
+	<p class="rsvp-<%= @event.id %>">
+		<%= render('rsvp_link', event: @event) %>
 	</p>
 
-	<p><% @event.description %><p>
+	<p><%= @event.description %><p>
 	<% if @event.creator == current_user %>
 		<p><%= link_to "Delete this event", event_path, method: :delete, data: { confirm: "Are you sure you want to delete this event?" } %></p>
 	<% end %>
+
+</div>

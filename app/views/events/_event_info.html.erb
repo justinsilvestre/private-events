@@ -1,0 +1,13 @@
+<div class="event-info">
+	<p>
+			<% if event.upcoming? %>
+			<%= event.date.strftime("%e %B %Y") %>
+		<% else %>
+			<%= time_ago_in_words(event.date) %> ago
+		<% end %>
+	</p>
+	<p>Created by <%= link_to event.creator.name, event.creator %></p>
+	<p><%= event.location %></p>
+	<p class="people-going-<%= event.id %>"><%= render 'events/people_going', event: event %></p>	
+	<p class="rsvp-<%= event.id %>"><%= render 'events/rsvp_link', event: event %></p>
+	</div>

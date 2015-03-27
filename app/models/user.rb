@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
 		BCrypt::Password.new(digest).is_password?(token)
 	end
 
+	def rsvp(event)
+
+	end
+
+	def unrsvp(event)
+		
+	end
+
 	def attending?(event)
 		attended_events.any? do |e|
 			event.id == e.id

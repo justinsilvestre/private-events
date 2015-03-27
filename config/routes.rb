@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   
   resources :users
   resources :events do
-    resources :attendances, only: [:create, :destroy]
+    member do
+      post 'rsvp' => 'attendances#create'
+      delete 'rsvp' => 'attendances#destroy'
+    end
   end
+  
   get 'signup' => 'users#new', as: :signup
 
   get 'login' => 'sessions#new'
@@ -15,7 +19,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static_pages#home'
+  root 'events#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

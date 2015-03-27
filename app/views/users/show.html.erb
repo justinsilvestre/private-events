@@ -1,43 +1,40 @@
+<div id="user-header"><h1><%= @user.name %></h1>
+<% if current_user && @user == current_user %>
+<p id="user-info"><%= @user.email %></p>
+<% end %></div>
 
-<% if @user == current_user %>
-
-	<h1><%= @user.name %></h1>
-
-	<p><%= @user.email %></p>
-	<p><%= link_to("Create a new event", new_event_path) %></p>
-	<% if @user.events.any? %>
-		<h2>Your Events</h2>
-		<ul>
-			<% @user.events.each do |event| %>
-			<li>
-				<h3><%= link_to event.name, event %></h3>
-				<p><%= truncate(event.description, length: 50) %></p>
-			</li>
-			<% end %>
-		</ul>
-	<% end %>
-		<h2>Going to</h2>
-		<ul>
-			<%= render @user.attended_events.upcoming %>
-		</ul>
-
-	<% else %>
-
-		<h1><%= @user.name %></h1>
-		<% if @user.events.any? %>
-			<h2><%= @user.name %>'s Events</h2>
-			<ul>
-				<% @user.events.each do |event| %>
-				<li>
-					<h3><%= link_to event.name, event %></h3>
-					<div><%= truncate(event.description, length: 30) %></div>
-				</li>
+<% if @user.events.any? %>
+	<section id="created-events">
+	<h2>Hosted by <%= @user.name.split.first %></h2>
+	<ul>
+		<% @user.events.each do |event| %>
+		<li>
+			<h3><%= link_to event.name, event %></h3>
+			<p class="event-info"><span class="event-date">
+				<% if event.upcoming? %>
+					<%= event.date.strftime("%e %B %Y") %>
+				<% else %>
+					<%= time_ago_in_words(event.date) %> ago
 				<% end %>
-			</ul>
+			</span><br />
+			<span><%= event.location %></span><br />
+			<span class="people-going"><%= render 'events/people_going', event: event %></span></p>
+		</li>
 		<% end %>
-
-		<h2>Going to</h2>
-		<ul>
-			<%= render @user.attended_events.upcoming %>
-		</ul>
+	</ul>
+	<% if current_user && @user == current_user %>
+	<p><%= link_to("Create a new event", new_event_path) %></p>
 	<% end %>
+	</section>
+<% end %>
+
+	<section id="attended-events">
+	<h2>Going to:</h2>
+	<ul>
+		<% if @user.attended_events.upcoming.any? %>
+		<%= render @user.attended_events.upcoming %>
+		<% else %>
+		<p><%= @user.name.split.first %> has not RSVP'd to any events.</p>
+		<% end %>
+	</ul>
+	</section>

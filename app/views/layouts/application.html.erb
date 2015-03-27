@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Private Events <%= "- #{current_user.name}" unless current_user.nil? %></title>
+  <title>Events <%= "- #{current_user.name}" unless current_user.nil? %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -14,7 +14,7 @@
 
 <div class="top">
 <header>
-	<h1>avents</h1>
+	<h1>events</h1>
 	<nav>
 		<ul>
 			<li><%= link_to "Events",events_path %></li>
