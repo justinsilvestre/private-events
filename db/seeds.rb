@@ -19,8 +19,8 @@ end
 	event = user.events.create!(name: Faker::Lorem.words(2+rand(4)).map(&:capitalize).join(" "), description: Faker::Lorem.paragraphs(2+rand(7)).join("\n\n"),
 		date: Faker::Date.between(6.months.ago, 6.months.from_now), location: Faker::Address.street_address)
 	# give event up to 25 attendees
-	(1+rand(24)).times do |m|
-		attendance = event.attendances.build(attendee_id: m)
+	(1+rand(24)).times do |moo|
+		attendance = event.attendances.build(attendee_id: moo)
 		attendance.save
 	end
 end
