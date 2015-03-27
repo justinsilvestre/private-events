@@ -20,11 +20,12 @@ class Event < ActiveRecord::Base
   	date >= Time.now
   end
 
-  
+=begin suppress for now while seeding on heroku
   validate :in_the_future, on: :create
   def in_the_future
     if date < Time.now
       errors.add(:date, "has already passed")
     end
   end
+=end
 end
